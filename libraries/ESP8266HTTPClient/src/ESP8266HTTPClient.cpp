@@ -936,7 +936,7 @@ int HTTPClient::handleHeaderResponse()
                 }
 
                 if(headerName.equalsIgnoreCase("Connection")) {
-                    _canReuse = headerValue.equalsIgnoreCase("keep-alive");
+                    _canReuse = true;
                 }
 
                 if(headerName.equalsIgnoreCase("Transfer-Encoding")) {
