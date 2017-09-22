@@ -50,12 +50,13 @@ public:
   size_t peekBytes(uint8_t *buffer, size_t length) override;
   void stop() override;
 
-  void setCertificate(const uint8_t* cert_data, size_t size);
-  void setPrivateKey(const uint8_t* pk, size_t size);
+  bool setCACert(const uint8_t* pk, size_t size);
+  bool setCertificate(const uint8_t* pk, size_t size);
+  bool setPrivateKey(const uint8_t* pk, size_t size);
 
+  bool loadCACert(Stream& stream, size_t size);
   bool loadCertificate(Stream& stream, size_t size);
   bool loadPrivateKey(Stream& stream, size_t size);
-  bool loadCACert(Stream& stream, size_t size);
 
   template<typename TFile>
   bool loadCertificate(TFile& file) {
@@ -66,6 +67,12 @@ public:
   bool loadPrivateKey(TFile& file) {
     return loadPrivateKey(file, file.size());
   }
+  
+  template<typename TFile>
+  bool loadCACert(TFile& file) {
+    return loadCACert(file, file.size());
+  }
+
 
 protected:
     int _connectSSL(const char* hostName);
